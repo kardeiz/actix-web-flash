@@ -309,7 +309,7 @@ where
             let mut jar = CookieJar::new();
             if let Some(cookie) = res.request().cookie(FLASH_COOKIE_NAME) {
                 jar.add_original(cookie);
-                jar.remove(Cookie::named(FLASH_COOKIE_NAME));
+                jar.remove(Cookie::build(FLASH_COOKIE_NAME, "").path("/").finish());
             }
             for cookie in jar.delta() {
                 let _ = res.response_mut().add_cookie(cookie);
